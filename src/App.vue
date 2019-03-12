@@ -2,20 +2,18 @@
   <v-app>
     <v-content>
       <!-- <Login/> -->
-      <Aside/>
+      <Login/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-// import Login from "./components/Login";
-import Aside from "./components/Layout/Aside";
+import Login from "./components/Login";
 
 export default {
   name: "App",
   components: {
-    // Login
-    Aside
+    Login
   },
   data() {
     return {
