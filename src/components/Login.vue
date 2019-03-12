@@ -1,87 +1,73 @@
 <template>
-  <v-container>
-    <v-layout text-xs-center wrap>
-      <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-        <template v-slot:activator="{ on }">
-          <v-btn color="primary" dark v-on="on">Open Dialog: count: {{ count }}</v-btn>
-        </template>
-        <v-card>
-          <v-toolbar dark color="primary">
-            <v-btn icon dark @click="dialog = false">
-              <v-icon>close</v-icon>
-            </v-btn>
-            <v-toolbar-title>Settings</v-toolbar-title>
-            <v-spacer></v-spacer>
-            <v-toolbar-items>
-              <v-btn dark flat @click="dialog = false">Save</v-btn>
-            </v-toolbar-items>
-          </v-toolbar>
-          <v-list three-line subheader>
-            <v-subheader>User Controls</v-subheader>
-            <v-list-tile avatar>
-              <v-list-tile-content>
-                <v-list-tile-title>Content filtering</v-list-tile-title>
-                <v-list-tile-sub-title>Set the content filtering level to restrict apps that can be downloaded</v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
-            <v-list-tile avatar>
-              <v-list-tile-content>
-                <v-list-tile-title>Password</v-list-tile-title>
-                <v-list-tile-sub-title>Require password for purchase or use password to restrict purchase</v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </v-list>
-          <v-divider></v-divider>
-          <v-list three-line subheader>
-            <v-subheader>General</v-subheader>
-            <v-list-tile avatar>
-              <v-list-tile-action>
-                <v-checkbox v-model="notifications"></v-checkbox>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>Notifications</v-list-tile-title>
-                <v-list-tile-sub-title>Notify me about updates to apps or games that I downloaded</v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
-            <v-list-tile avatar>
-              <v-list-tile-action>
-                <v-checkbox v-model="sound"></v-checkbox>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>Sound</v-list-tile-title>
-                <v-list-tile-sub-title>Auto-update apps at any time. Data charges may apply</v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
-            <v-list-tile avatar>
-              <v-list-tile-action>
-                <v-checkbox v-model="widgets"></v-checkbox>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>Auto-add widgets</v-list-tile-title>
-                <v-list-tile-sub-title>Automatically add home screen widgets</v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </v-list>
-        </v-card>
-      </v-dialog>
-    </v-layout>
-  </v-container>
+  <div>
+    <div class="login">
+      <v-card class="login_card" height="100%">
+        <v-card-title class="logo-didicast pt-5">
+          <img src="../assets/img/logo-didicast.svg" class="logo-didicast">
+        </v-card-title>
+        <v-card-text>
+          <p>아이디</p>
+          <v-form class="login_input">
+            <v-text-field outline></v-text-field>
+          </v-form>
+          <p>비밀번호</p>
+          <v-form class="login_input">
+            <v-text-field
+              outline
+              v-model="password"
+              :append-icon="show1 ? 'visibility' : 'visibility_off'"
+              :rules="[rules.required, rules.validError]"
+              :type="show1 ? 'text' : 'password'"
+              name="login_password"
+              @click:append="show1 = !show1"
+            ></v-text-field>
+          </v-form>
+        </v-card-text>
+        <v-btn color="primary" @click="submit">로그인</v-btn>
+        <img src="../assets/img/login.jpg" class="login_img">
+      </v-card>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      dialog: false
+      show1: false,
+      password: "Password",
+      rules: {
+        required: value => !!value || "Required.",
+        validError: () => "비밀번호를 오류(5회 이상). 고객센터로 문의 바랍니다."
+      }
     };
-  },
-  computed: {
-    count() {
-      return this.$store.state.counter.main;
-    }
   }
 };
 </script>
 
-<style>
+<style lang="stylus" scoped>
+  .login
+    width 1366px
+    height 768px
+    background-color #ffffff
+    border 1px solid red
+
+  .login_card
+    position relative
+
+  .logo-didicast
+    width 220px
+    height 26px
+    top 57px
+
+  .login_input
+    width 400px
+
+  .login_img
+    position absolute
+    top 0
+    right 0
+    width 683px
+    height 768px
+           
 </style>
