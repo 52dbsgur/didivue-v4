@@ -23,7 +23,9 @@
             ></v-text-field>
           </v-form>
         </v-card-text>
-        <v-btn color="primary" @click="Login">로그인</v-btn>
+        <!-- <v-btn color="primary" @click="$router.push('layout')">로그인</v-btn> -->
+          <v-btn to="/layout">로그인</v-btn>
+       
         <img src="../assets/img/login.jpg" class="login_img">
       </v-card>
     </div>
@@ -43,9 +45,7 @@ export default {
     };
   },
   methods: {
-    Login() {
-      //Layout 으로 이동
-    }
+    
   }
 };
 </script>

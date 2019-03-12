@@ -1,6 +1,9 @@
 <template>
   <div>
-    
+    test!!!
+    <Header/>
+    <Aside/>
+    <ProgressInfo/>
   </div>
 </template>
 
@@ -8,13 +11,11 @@
 import Aside from './Layout/Aside'
 import Header from './Layout/Header'
 import ProgressInfo from './Layout/ProgressInfo'
-import Dashboard from './Dashboard'
-
 
 export default {
   name: 'Layout',
   components: {
-    Aside, Header, ProgressInfo, Dashboard
+    Aside, Header, ProgressInfo
   }
 }
 </script>

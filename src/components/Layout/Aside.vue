@@ -5,10 +5,10 @@
       <v-list-tile
         v-for="item in items"
         :key="item.title"
-        @click="submit"
+        router :to="item.route"
       >
         <v-list-tile-action>
-          <v-btn>{{ item.icon }}</v-btn>
+          <!-- <v-btn>{{ item.icon }}</v-btn> -->
         </v-list-tile-action>
 
         <v-list-tile-content>
@@ -24,12 +24,12 @@
     data () {
       return {
         items: [
-          { title: 'Dashboard', icon: 'dashboard' },
-          { title: 'Record', icon: 'question_answer' },
-          { title: 'Stacks', icon: 'question_answer' },
-          { title: 'Settings', icon: 'question_answer' }
-        ],
-        right: null
+          { title: 'Dashboard', icon: 'dashboard', route: '/' },
+          { title: 'Record', icon: 'question_answer', route: '/record' },
+          { title: 'Stacks', icon: 'question_answer' , route: '/stacks'},
+          { title: 'Settings', icon: 'question_answer' , route: '/settings'}
+        ]
+
       }
     }
   }
