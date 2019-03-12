@@ -13,7 +13,10 @@
   },
   "dependencies": {
     "vue": "^2.6.6",
-    "vuetify": "^1.5.5"
+    "vue-router": "^3.0.2",
+    "vuetify": "^1.5.5",
+    "vuex": "^3.1.0",
+    "vuex-electron": "^1.0.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",

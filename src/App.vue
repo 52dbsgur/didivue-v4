@@ -6,29 +6,25 @@
         <span class="font-weight-light">MATERIAL DESIGN</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn flat href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank">
-        <span class="mr-2">Latest Release</span>
+      <v-btn flat router-link to="/">
+        <span class="mr-2">Home</span>
+      </v-btn>
+      <v-btn flat router-link to="/login">
+        <span class="mr-2">Login</span>
+      </v-btn>
+      <v-btn flat router-link to="/system-info">
+        <span class="mr-2">System Informaiton</span>
       </v-btn>
     </v-toolbar>
-
-    <v-content>
-      <HelloWorld/>
-    </v-content>
+    <br>
+    <br>
+    <br>
+    <router-view></router-view>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
-
 export default {
-  name: "App",
-  components: {
-    HelloWorld
-  },
-  data() {
-    return {
-      //
-    };
-  }
+  name: "App"
 };
 </script>
