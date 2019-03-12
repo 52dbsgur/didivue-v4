@@ -23,7 +23,7 @@
             ></v-text-field>
           </v-form>
         </v-card-text>
-        <v-btn color="primary" @click="submit">로그인</v-btn>
+        <v-btn color="primary" @click="Login">로그인</v-btn>
         <img src="../assets/img/login.jpg" class="login_img">
       </v-card>
     </div>
@@ -41,6 +41,11 @@ export default {
         validError: () => "비밀번호를 오류(5회 이상). 고객센터로 문의 바랍니다."
       }
     };
+  },
+  methods: {
+    Login() {
+      //Layout 으로 이동
+    }
   }
 };
 </script>
