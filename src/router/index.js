@@ -5,6 +5,7 @@ import Dashboard from "../components/Dashboard";
 import Record from "../components/Record";
 import Stacks from "../components/Stacks";
 import Settings from "../components/Settings";
+import Login from "../components/Login";
 
 Vue.use(Router);
 
@@ -16,26 +17,37 @@ export default new Router({
       component: Layout,
       children: [
         {
-          path: "/Dashboard",
+          path: "dashboard",
           name: "dashboard",
-          component: Dashboard
+          component: Dashboard,
         },
         {
-          path: "/Record",
+          path: "record",
           name: "record",
           component: Record
         },
         {
-          path: "/Stacks",
+          path: "stacks",
           name: "stacks",
           component: Stacks
         },
         {
-          path: "/Settings",
+          path: "settings",
           name: "settings",
           component: Settings
         }
       ]
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: Login
+    },
+    {
+      path: "/",
+      name: "landing",
+      component: Login
     }
+
   ]
 });

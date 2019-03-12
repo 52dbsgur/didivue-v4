@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div>apple</div>
     <Alert/>
     <RecordLecInfo/>
     <RecordStatus/>

@@ -3,6 +3,7 @@
     test!!!
     <Header/>
     <Aside/>
+    <router-view></router-view>
     <ProgressInfo/>
   </div>
 </template>

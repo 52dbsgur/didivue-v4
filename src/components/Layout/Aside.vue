@@ -25,9 +25,9 @@
       return {
         items: [
           { title: 'Dashboard', icon: 'dashboard', route: '/' },
-          { title: 'Record', icon: 'question_answer', route: '/record' },
-          { title: 'Stacks', icon: 'question_answer' , route: '/stacks'},
-          { title: 'Settings', icon: 'question_answer' , route: '/settings'}
+          { title: 'Record', icon: 'record', route: '/layout/record' },
+          { title: 'Stacks', icon: 'folder' , route: '/stacks'},
+          { title: 'Settings', icon: 'setting' , route: '/settings'}
         ]
 
       }

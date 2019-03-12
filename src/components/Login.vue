@@ -23,7 +23,8 @@
             ></v-text-field>
           </v-form>
         </v-card-text>
-        <!-- <v-btn color="primary" @click="$router.push('layout')">로그인</v-btn> -->
+          <!-- <v-btn color="primary" @click="$router.push('layout')">로그인</v-btn>
+          <router-link to="layout"><button>test</button></router-link> -->
           <v-btn to="/layout">로그인</v-btn>
        
         <img src="../assets/img/login.jpg" class="login_img">
