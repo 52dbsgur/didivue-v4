@@ -1,6 +1,5 @@
 <template>
   <div>
-    test!!!
     <Header/>
     <Aside/>
     <router-view></router-view>

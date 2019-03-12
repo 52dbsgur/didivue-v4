@@ -56,7 +56,6 @@ export default {
     width 1366px
     height 768px
     background-color #ffffff
-    border 1px solid red
 
   .login_card
     position relative
