@@ -26,9 +26,12 @@
 </template>
 
 <script>
+//npm install ffdevices [FOR FIND DEVICES (Video, audio)]
 export default {
   data() {
     return {
+      selectCamera: '',   //사용자가 v-select에서 선택한 Camera
+      cameras: [],        //Devices Camera List (Video를 지원하는)
       device_on: [
         { name: '스크린', status: '스크린 연결 완료', icon: './ic-screen-gray.svg' },
         { name: '카메라', status: '카메라 연결 완료', icon: './ic-camera-gray.svg' },
@@ -41,8 +44,35 @@ export default {
         { name: '마이크', status: '마이크 연결 대기중', icon: './ic-mic-gray.svg' },
         { name: '윈도우 환경 설정', status: '윈도우 설정 대기중', icon: './ic-speaker-gray.svg' }
       ],
-
     }
+  },
+  methods: {
+    //디바이스의 정보를 가져오는 부분
+    getDevices () {
+      let self = this
+      const ffdevices = require('ffdevices')
+      ffdevices.getAll(function (error, devices) {
+        if (!error) {
+          self.addCameralist(devices)
+        } else {
+          console.log('getffmpegDevices > error :', error)
+        }
+      })
+    },
+    addCameralist (devices) {
+      this.selectCamera = devices[0].name   //초기 카메라를 Devices의 목록중 제일 처음의 것으로 선택하여 나타냄
+      let flag = false                      //디바이스의 타입이 video인지 audio인지 확인하기 위하여 생성한 flag변수
+      devices.forEach((item) => {
+        (item.type !== 'audio') ? flag = true : flag = false
+        if (flag === true) {
+          console.log(item)
+          this.cameras.push(item)
+        }
+      })
+    }
+  },
+  mounted () {
+    this.getDevices()
   }
 }
 </script>
