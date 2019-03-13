@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="layout">
     <Header/>
     <Aside/>
     <router-view></router-view>
@@ -21,5 +21,4 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-
 </style>

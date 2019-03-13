@@ -1,5 +1,7 @@
 <template>
   <div>
+  <!-- <v-container class="container">
+    <v-layout class="layout" row wrap> -->
     <DeviceReady/>
     <GuideSound/>
     <Plan/>
@@ -8,6 +10,8 @@
     <Pricing/>
     <RecordStart/>
     <TestDevices/>
+    <!-- </v-layout>
+  </v-container> -->
   </div>
 </template>
 
@@ -36,5 +40,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-
+  .container
+    margin 0
+    max-width 1600px
 </style>
