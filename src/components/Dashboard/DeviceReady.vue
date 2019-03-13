@@ -1,80 +1,96 @@
+/* 
+1. 전달받은 디바이스 타입속성을 통해서 디바이스 검색/콤보 값 세팅
+2. 사용자가 선택한 디바이스를 스토어에 저장
+ */
+
 <template>
-  <div>
-    <div class="device_ready" v-for="item in device_on" :key="item.name">
-    <v-card flat class="card text-xs-center ma-3" style="z-index: 9999">
-      <v-card-title class="card_title">
-        <h2>{{ item.name}}</h2>
+  <div class="device_ready">
+    <v-card v-if="device" flat class="card text-xs-center ma-3" style="z-index: 9999">
+      <v-card-title :class="card_title_class">
+        <h2>{{ device.name}}</h2>
       </v-card-title>
       <v-card-text class="pt-3">
         <v-avatar class="white">
-          <img :src="item.icon">
+          <img :src="device.icon_off">
         </v-avatar>
       </v-card-text>
+      <div v-if="device.type == 'camera'">
         <v-card-text>
-          <div class="subheading">{{ item.name }}</div>
-          <div class="grey--text">{{ item.status }}</div>
+          <div class="subheading">{{ device.name }}</div>
+          <div class="grey--text">{{ device.name }} 연결 {{ isOn ? '연결 완료' : '대기' }}</div>
         </v-card-text>
         <v-select
           class="select"
-          :device_on="item.name"
+          v-model="deviceValues"
+          :items="deviceNames"
           label="선택해 주세요"
+          v-on:change="changeDevice"
           outline
         ></v-select>
-      </v-card>
-    </div>
+      </div>
+      <div v-else>other</div>
+    </v-card>
   </div>
 </template>
 
 <script>
 //npm install ffdevices [FOR FIND DEVICES (Video, audio)]
 export default {
+  name: "DeviceReady",
+  props: ["device"],
   data() {
     return {
-      selectCamera: '',   //사용자가 v-select에서 선택한 Camera
-      cameras: [],        //Devices Camera List (Video를 지원하는)
-      device_on: [
-        { name: '스크린', status: '스크린 연결 완료', icon: './ic-screen-gray.svg' },
-        { name: '카메라', status: '카메라 연결 완료', icon: './ic-camera-gray.svg' },
-        { name: '마이크', status: '마이크 연결 완료', icon: './ic-mic-gray.svg' },
-        { name: '윈도우 환경 설정', status: '윈도우 설정 완료', icon: './ic-speaker-blue.svg' }
-      ],
-      device_off: [
-        { name: '스크린', status: '스크린 연결 대기중', icon: './ic-screen-gray.svg' },
-        { name: '카메라', status: '카메라 연결 대기중', icon: './ic-camera-gray.svg' },
-        { name: '마이크', status: '마이크 연결 대기중', icon: './ic-mic-gray.svg' },
-        { name: '윈도우 환경 설정', status: '윈도우 설정 대기중', icon: './ic-speaker-gray.svg' }
-      ],
-    }
+      selectedDevice: "", //사용자가 v-select에서 선택한 Camera
+      deviceNames: [], //Devices Camera List (Video를 지원하는)
+      deviceValues: [], //Devices Camera List (Video를 지원하는)
+      isOn: false,
+      card_title_class: "card_title_gray"
+    };
   },
   methods: {
     //디바이스의 정보를 가져오는 부분
-    getDevices () {
-      let self = this
-      const ffdevices = require('ffdevices')
-      ffdevices.getAll(function (error, devices) {
+    getDevices() {
+      let self = this;
+      const ffdevices = require("ffdevices");
+      ffdevices.getAll(function(error, devices) {
         if (!error) {
-          self.addCameralist(devices)
+          self.addlist(devices);
         } else {
-          console.log('getffmpegDevices > error :', error)
+          console.log("getffmpegDevices > error :", error);
         }
-      })
+      });
     },
-    addCameralist (devices) {
-      this.selectCamera = devices[0].name   //초기 카메라를 Devices의 목록중 제일 처음의 것으로 선택하여 나타냄
-      let flag = false                      //디바이스의 타입이 video인지 audio인지 확인하기 위하여 생성한 flag변수
-      devices.forEach((item) => {
-        (item.type !== 'audio') ? flag = true : flag = false
+    addlist(devices) {
+      console.log("count :", this.$store.state.counter.main);
+
+      console.log("devices :", devices);
+      // this.selectCamera = devices[0].name; //초기 카메라를 Devices의 목록중 제일 처음의 것으로 선택하여 나타냄
+      let flag = false; //디바이스의 타입이 video인지 audio인지 확인하기 위하여 생성한 flag변수
+      devices.forEach(item => {
+        item.type !== "audio" ? (flag = true) : (flag = false);
         if (flag === true) {
-          console.log(item)
-          this.cameras.push(item)
+          console.log(item.name);
+          this.deviceNames.push(item.name);
+          this.deviceValues.push(item.value);
         }
-      })
+      });
+    },
+    changeDevice(e) {
+      // 선택된 디바이스를 스토어에 저장
+      this.selectedDevice = e;
+      if (this.device.type == "camera") {
+        this.card_title_class = "card_title";
+        this.isOn = true;
+        this.$store.dispatch("dashboard/changeDeviceCamera", {
+          selectedDevice: this.selectedDevice
+        });
+      }
     }
   },
-  mounted () {
-    this.getDevices()
+  mounted() {
+    this.getDevices();
   }
-}
+};
 </script>
 
 <style lang="stylus" scoped>
@@ -101,6 +117,13 @@ export default {
     border-radius 6.1px
     border solid 0.8px #bdbdbd
     background-color #05b1d8 
+
+  .card_title_gray
+    width 270px
+    height 42px
+    border-radius 6.1px
+    border solid 0.8px #bdbdbd
+    background-color gray 
 
   .card_title h2
     color white

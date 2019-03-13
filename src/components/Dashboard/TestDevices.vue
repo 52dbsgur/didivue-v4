@@ -1,15 +1,54 @@
+/* 
+1. DeviceReady 를 렌더링
+2. 각 DeviceReady에 속성, 타이틀, 아이콘을 전달
+ */
+
 <template>
   <div>
     <div class="test_devices">
       <h1>장치 테스트</h1>
     </div>
+    <div>
+      <DeviceReady v-for="device in devices" :key="device.type" :device="device"/>
+    </div>
   </div>
 </template>
 
 <script>
+import DeviceReady from "@/components/Dashboard/DeviceReady";
 export default {
-  
-}
+  components: { DeviceReady },
+  data() {
+    return {
+      devices: [
+        {
+          type: "screen",
+          name: "스크린",
+          icon_on: "./ic-screen-blue.svg",
+          icon_off: "./ic-screen-gray.svg"
+        },
+        {
+          type: "camera",
+          name: "카메라",
+          icon_on: "./ic-screen-blue.svg",
+          icon_off: "./ic-screen-gray.svg"
+        }
+        // {
+        //   type: "microphone",
+        //   name: "마이크",
+        //   icon_on: "./ic-screen-blue.svg",
+        //   icon_off: "./ic-screen-gray.svg"
+        // },
+        // {
+        //   type: "system-sound",
+        //   name: "시스템사운드",
+        //   icon_on: "./ic-screen-blue.svg",
+        //   icon_off: "./ic-screen-gray.svg"
+        // }
+      ]
+    };
+  }
+};
 </script>
 
 <style lang="stylus" scoped>
